@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meet Dodiya — AI Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0b0f17;
+      --bg2: #111827;
+      --bg3: #1a2235;
+      --accent: #6ee7f7;
+      --accent2: #a78bfa;
+      --text: #e8edf5;
+      --muted: #8896b0;
+      --border: rgba(255,255,255,0.08);
+      --card: rgba(255,255,255,0.04);
+      --font: 'Space Grotesk', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 2.5rem;
+      background: rgba(11,15,23,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(110,231,247,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(110,231,247,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(110,231,247,0.08) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%, -60%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 780px;
+      text-align: center;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      background: rgba(110,231,247,0.08);
+      border: 1px solid rgba(110,231,247,0.2);
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.08em;
+    }
+    .hero-name {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+    .hero-name span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-role {
+      font-size: 1.2rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+    }
+    .hero-summary {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.75;
+    }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0b0f17;
+      border: none;
+    }
+    .btn-primary:hover { background: #9ef7ff; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+    .hero-stats {
+      display: flex; gap: 3rem; justify-content: center;
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-num {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 2rem; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 3rem;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg2); }
+    .exp-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    .exp-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      flex-wrap: wrap; gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .exp-company {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .exp-period {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      background: rgba(110,231,247,0.08);
+      border: 1px solid rgba(110,231,247,0.2);
+      padding: 0.2rem 0.75rem;
+      border-radius: 100px;
+    }
+    .exp-points { list-style: none; }
+    .exp-points li {
+      color: var(--muted);
+      font-size: 0.92rem;
+      padding: 0.4rem 0;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+    .exp-points li::before {
+      content: '→';
+      position: absolute; left: 0;
+      color: var(--accent);
+      font-size: 0.8rem;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.6rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .project-card:hover {
+      border-color: rgba(110,231,247,0.3);
+      transform: translateY(-3px);
+    }
+    .project-icon {
+      width: 40px; height: 40px;
+      background: rgba(110,231,247,0.1);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .project-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .project-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent2);
+      background: rgba(167,139,250,0.1);
+      border: 1px solid rgba(167,139,250,0.2);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--bg2); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .skill-group {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem;
+    }
+    .skill-group-title {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.8rem;
+    }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .skill-pill {
+      font-size: 0.8rem;
+      color: var(--muted);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.7rem;
+      border-radius: 6px;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-grid { display: grid; gap: 1rem; }
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 0.5rem;
+    }
+    .edu-degree {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .edu-school {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+    .edu-period {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--accent2);
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg2); text-align: center; }
+    .contact-links {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.75rem; }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+      section { padding: 4rem 1.25rem; }
+      .edu-card { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">meet.dodiya</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">&#x2022; Open to opportunities</div>
+    <h1 class="hero-name">Meet <span>Dodiya</span></h1>
+    <p class="hero-role">Junior AI Engineer &nbsp;·&nbsp; Ahmedabad, Gujarat</p>
+    <p class="hero-summary">
+      Building LLM-powered applications, RAG systems, and scalable backend APIs using FastAPI. 
+      4+ production-grade AI solutions in the wild — conversational AI, medical report generation, and NL-to-SQL engines.
+    </p>
+    <div class="hero-actions">
+      <a href="mailto:meetdodiya711879@gmail.com" class="btn btn-primary">Get in touch</a>
+      <a href="https://github.com/meet-dodiya1710" target="_blank" class="btn btn-outline">GitHub →</a>
+      <a href="https://www.linkedin.com/in/meet-dodiya-7b30812ba/" target="_blank" class="btn btn-outline">LinkedIn →</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">4+</span>
+        <span class="stat-label">Production AI apps</span>
+      </div>
+      <div>
+        <span class="stat-num">90%</span>
+        <span class="stat-label">Report time reduction</span>
+      </div>
+      <div>
+        <span class="stat-num">98%</span>
+        <span class="stat-label">ML model accuracy</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <p class="section-eyebrow">// work history</p>
+    <h2 class="section-title">Experience</h2>
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-company">Evolvision Technologies</div>
+          <div style="font-size:0.82rem; color:var(--muted); margin-top:0.2rem;">AI Engineer</div>
+        </div>
+        <span class="exp-period">Apr 2025 – Present</span>
+      </div>
+      <ul class="exp-points">
+        <li>Developed 4 Generative AI and LLM-powered applications using FastAPI, OpenAI, Groq, and Ollama</li>
+        <li>Built scalable backend services, REST APIs, and AI automation solutions for enterprise clients</li>
+        <li>Worked on RAG systems, conversational AI, report generation, and intelligent document processing platforms</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <p class="section-eyebrow">// what i've built</p>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-icon">🧠</div>
+        <div class="project-title">Enterprise RAG Knowledge Assistant</div>
+        <div class="project-desc">
+          RAG chatbot for enterprise knowledge retrieval with document chunking, embedding generation, semantic search, and context-aware response pipelines.
+        </div>
+        <div class="project-tags">
+          <span class="tag">GPT-4o-mini</span>
+          <span class="tag">ChromaDB</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">RAG</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🏥</div>
+        <div class="project-title">AI Kidney Health Report Generator</div>
+        <div class="project-desc">
+          Reduced medical report generation time by 90%+ (20–30 min → 2–3 min per patient) with multilingual support via Sarvam AI translation.
+        </div>
+        <div class="project-tags">
+          <span class="tag">GPT-4o-mini</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">Sarvam AI</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🗄️</div>
+        <div class="project-title">Natural Language → SQL Engine</div>
+        <div class="project-desc">
+          NL-to-SQL system using LLMs via OpenRouter enabling non-technical users to query 4 database tables through plain English conversational prompts.
+        </div>
+        <div class="project-tags">
+          <span class="tag">OpenRouter</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">LLM</span>
+          <span class="tag">SQL</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">📈</div>
+        <div class="project-title">Marketing Conversion Predictor</div>
+        <div class="project-desc">
+          ML classification system trained on 1,000+ customer records. XGBoost model hit 98% accuracy, deployed via FastAPI + Streamlit real-time dashboard.
+        </div>
+        <div class="project-tags">
+          <span class="tag">XGBoost</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">Streamlit</span>
+          <span class="tag">ML</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <p class="section-eyebrow">// tech stack</p>
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+
+      <div class="skill-group">
+        <div class="skill-group-title">Backend Development</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">FastAPI</span>
+          <span class="skill-pill">REST APIs</span>
+          <span class="skill-pill">Async Programming</span>
+          <span class="skill-pill">Auth & Authorization</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Generative AI & LLMs</div>
+        <div class="skill-pills">
+          <span class="skill-pill">OpenAI</span>
+          <span class="skill-pill">Anthropic</span>
+          <span class="skill-pill">Groq</span>
+          <span class="skill-pill">Ollama</span>
+          <span class="skill-pill">OpenRouter</span>
+          <span class="skill-pill">RAG</span>
+          <span class="skill-pill">Prompt Engineering</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">AI & Machine Learning</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Machine Learning</span>
+          <span class="skill-pill">NLP</span>
+          <span class="skill-pill">OCR</span>
+          <span class="skill-pill">Classification Models</span>
+          <span class="skill-pill">Feature Engineering</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Databases</div>
+        <div class="skill-pills">
+          <span class="skill-pill">MySQL</span>
+          <span class="skill-pill">PostgreSQL</span>
+          <span class="skill-pill">ChromaDB</span>
+          <span class="skill-pill">OpenAI Embeddings</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Speech AI</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Deepgram STT</span>
+          <span class="skill-pill">Deepgram TTS</span>
+          <span class="skill-pill">Sarvam AI</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Tools & Version Control</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Git</span>
+          <span class="skill-pill">GitHub</span>
+          <span class="skill-pill">Cursor</span>
+          <span class="skill-pill">Windsurf</span>
+          <span class="skill-pill">Claude Code</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <p class="section-eyebrow">// background</p>
+    <h2 class="section-title">Education</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div>
+          <div class="edu-degree">Master Diploma in Data Science & AI</div>
+          <div class="edu-school">Boston Institute of Analytics</div>
+        </div>
+        <div class="edu-period">Jun 2024 – Dec 2024</div>
+      </div>
+      <div class="edu-card">
+        <div>
+          <div class="edu-degree">Bachelor of Computer Applications (BCA)</div>
+          <div class="edu-school">Maharaja Krishnakumarsinhji Bhavnagar University</div>
+        </div>
+        <div class="edu-period">Sep 2021 – Apr 2024</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-eyebrow">// let's talk</p>
+    <h2 class="section-title">Get in Touch</h2>
+    <p style="color:var(--muted); max-width:500px; margin:0 auto;">
+      I'm actively looking for AI engineering roles. Whether it's about a project, a job, or just a chat about LLMs — reach out.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:meetdodiya711879@gmail.com" class="btn btn-primary">meetdodiya711879@gmail.com</a>
+      <a href="https://github.com/meet-dodiya1710" target="_blank" class="btn btn-outline">GitHub</a>
+      <a href="https://www.linkedin.com/in/meet-dodiya-7b30812ba/" target="_blank" class="btn btn-outline">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Built by Meet Dodiya &nbsp;·&nbsp; 2025</p>
+</footer>
+
+</body>
+</html>
