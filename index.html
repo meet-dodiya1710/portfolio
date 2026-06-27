@@ -1,394 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meet Dodiya — AI Engineer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #0b0f17;
-      --bg2: #111827;
-      --accent: #6ee7f7;
-      --accent2: #a78bfa;
-      --text: #e8edf5;
-      --muted: #8896b0;
-      --border: rgba(255,255,255,0.08);
-      --card: rgba(255,255,255,0.04);
-      --font: 'Space Grotesk', sans-serif;
-      --mono: 'JetBrains Mono', monospace;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg); color: var(--text);
-      font-family: var(--font); font-size: 16px;
-      line-height: 1.7; overflow-x: hidden;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>meet.dodiya — Junior AI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --void:#0A0E14;
+  --panel:#11161D;
+  --panel2:#161C25;
+  --line:#1F2630;
+  --line-bright:#2B3441;
+  --text:#C9D1D9;
+  --text-bright:#F0F4F8;
+  --muted:#6E7681;
+  --amber:#E3B341;
+  --amber-dim:#7A5E22;
+  --green:#3FB950;
+  --red:#F85149;
+  --blue:#58A6FF;
+  --mono:'JetBrains Mono',monospace;
+  --sans:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--text);font-family:var(--mono);font-size:15px;line-height:1.7;overflow-x:hidden}
+::selection{background:var(--amber-dim);color:var(--text-bright)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 2.5rem;
-      background: rgba(11,15,23,0.92); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo { font-family: var(--mono); font-size: 0.9rem; color: var(--accent); letter-spacing: 0.05em; }
-    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--text); }
-    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--muted); border-radius: 2px; transition: all 0.3s; }
-    .mobile-menu {
-      display: none; position: fixed; top: 57px; left: 0; right: 0; z-index: 199;
-      background: rgba(11,15,23,0.98); backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 1.5rem 1.5rem; flex-direction: column;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.75rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s; }
-    .mobile-menu a:last-child { border-bottom: none; }
-    .mobile-menu a:hover { color: var(--accent); }
+.noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.025;
+  background-image:repeating-linear-gradient(0deg,#fff 0px,transparent 1px,transparent 2px);
+  mix-blend-mode:overlay}
 
-    /* ── BUTTONS ── */
-    .btn {
-      display: inline-flex; align-items: center; gap: 0.45rem;
-      padding: 0.7rem 1.5rem; border-radius: 8px;
-      font-family: var(--font); font-size: 0.88rem; font-weight: 500;
-      text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
-    }
-    .btn-primary { background: var(--accent); color: #0b0f17; }
-    .btn-primary:hover { background: #9ef7ff; transform: translateY(-1px); }
-    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
-    .btn-resume { background: rgba(167,139,250,0.12); color: var(--accent2); border: 1px solid rgba(167,139,250,0.3); }
-    .btn-resume:hover { background: rgba(167,139,250,0.22); transform: translateY(-1px); }
+/* ══ TOP CHROME / TAB BAR ══ */
+.chrome{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--panel);border-bottom:1px solid var(--line)}
+.titlebar{display:flex;align-items:center;gap:.6rem;padding:.55rem 1rem;border-bottom:1px solid var(--line)}
+.dots{display:flex;gap:6px;flex-shrink:0}
+.dot{width:11px;height:11px;border-radius:50%}
+.dot.r{background:#F85149}.dot.y{background:#E3B341}.dot.g{background:#3FB950}
+.titlebar-path{font-size:.72rem;color:var(--muted);letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.titlebar-path b{color:var(--text)}
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh; display: flex; align-items: center; justify-content: center;
-      padding: 7rem 1.5rem 4rem; position: relative; overflow: hidden;
-    }
-    .hero-grid {
-      position: absolute; inset: 0; z-index: 0;
-      background-image: linear-gradient(rgba(110,231,247,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(110,231,247,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-    }
-    .hero-glow { position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(110,231,247,0.08) 0%, transparent 70%); top: 40%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
-    .hero-content { position: relative; z-index: 1; max-width: 760px; text-align: center; width: 100%; }
-    .hero-tag { display: inline-block; font-family: var(--mono); font-size: 0.75rem; color: var(--accent); background: rgba(110,231,247,0.08); border: 1px solid rgba(110,231,247,0.2); padding: 0.3rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; letter-spacing: 0.08em; }
-    .hero-name { font-size: clamp(2.6rem, 8vw, 5rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
-    .hero-name span { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .hero-role { font-size: 1.1rem; color: var(--muted); margin-bottom: 1.5rem; }
-    .hero-summary { font-size: 0.97rem; color: var(--muted); max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.8; }
-    .hero-actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; padding: 0 0.5rem; }
-    .hero-stats { display: flex; gap: 2rem; justify-content: center; margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
-    .stat-item { text-align: center; }
-    .stat-num { font-size: 1.8rem; font-weight: 700; color: var(--accent); display: block; }
-    .stat-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.tabstrip{display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none}
+.tabstrip::-webkit-scrollbar{display:none}
+.tab{
+  display:flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;
+  font-size:.74rem;color:var(--muted);white-space:nowrap;cursor:pointer;
+  border-right:1px solid var(--line);background:var(--panel);
+  text-decoration:none;transition:color .15s,background .15s;position:relative;
+}
+.tab .dot-status{width:6px;height:6px;border-radius:50%;background:var(--line-bright);flex-shrink:0}
+.tab:hover{color:var(--text);background:var(--panel2)}
+.tab.active{color:var(--amber);background:var(--void)}
+.tab.active .dot-status{background:var(--amber)}
+.tab.active::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:var(--amber)}
+.tab-cmd{margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:.4rem;padding:.5rem .9rem;
+  font-size:.7rem;color:var(--muted);border-left:1px solid var(--line);background:var(--panel);
+  cursor:pointer;transition:color .15s,background .15s}
+.tab-cmd:hover{color:var(--amber);background:var(--panel2)}
+.tab-cmd kbd{font-family:var(--mono);font-size:.65rem;background:var(--panel2);border:1px solid var(--line-bright);
+  border-radius:3px;padding:.05rem .35rem;color:var(--muted)}
 
-    /* ── SECTIONS ── */
-    section { padding: 5rem 1.5rem; }
-    .container { max-width: 960px; margin: 0 auto; }
-    .section-eyebrow { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.4rem; }
-    .section-title { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
+.titlebar-actions{display:flex;align-items:center;gap:.5rem;margin-left:auto;flex-shrink:0}
+.icon-btn{display:none;background:var(--panel2);border:1px solid var(--line-bright);color:var(--amber);
+  cursor:pointer;padding:.4rem .65rem;font-size:.7rem;font-weight:700;border-radius:5px;font-family:var(--mono);
+  letter-spacing:.02em}
+.icon-btn:active{background:var(--amber-dim)}
+.ham{display:none;background:var(--panel2);border:1px solid var(--line-bright);border-radius:5px;color:var(--text);
+  cursor:pointer;padding:.4rem .7rem;font-size:.9rem;line-height:1}
+.ham:active{background:var(--panel2)}
+.mobile-dropdown{display:none;flex-direction:column;background:var(--panel);border-top:1px solid var(--line)}
+.mobile-dropdown.open{display:flex}
+.m-link{display:flex;align-items:center;gap:.6rem;padding:.85rem 1.1rem;color:var(--text);text-decoration:none;
+  font-size:.82rem;border-bottom:1px solid var(--line)}
+.m-link:last-child{border-bottom:none}
+.m-link:active{background:var(--panel2);color:var(--amber)}
+.m-link::before{content:'❯';color:var(--amber);font-size:.7rem}
 
-    /* ── EXPERIENCE ── */
-    #experience { background: var(--bg2); }
-    .exp-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; }
-    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem; }
-    .exp-company { font-size: 1.05rem; font-weight: 600; color: var(--text); }
-    .exp-role { font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem; }
-    .exp-period { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); background: rgba(110,231,247,0.08); border: 1px solid rgba(110,231,247,0.2); padding: 0.2rem 0.75rem; border-radius: 100px; white-space: nowrap; }
-    .exp-points { list-style: none; }
-    .exp-points li { color: var(--muted); font-size: 0.9rem; padding: 0.35rem 0; padding-left: 1.2rem; position: relative; }
-    .exp-points li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+/* ══ COMMAND PALETTE ══ */
+.cmdk-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(5,7,10,.7);backdrop-filter:blur(3px);
+  align-items:flex-start;justify-content:center;padding-top:12vh}
+.cmdk-overlay.open{display:flex}
+.cmdk-box{width:min(560px,90vw);background:var(--panel);border:1px solid var(--line-bright);border-radius:8px;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);overflow:hidden}
+.cmdk-input-row{display:flex;align-items:center;gap:.6rem;padding:.9rem 1.1rem;border-bottom:1px solid var(--line)}
+.cmdk-prompt{color:var(--amber);font-weight:700}
+.cmdk-input{flex:1;background:none;border:none;color:var(--text-bright);font-family:var(--mono);font-size:.92rem;outline:none}
+.cmdk-input::placeholder{color:var(--muted)}
+.cmdk-esc{font-size:.65rem;color:var(--muted);border:1px solid var(--line-bright);border-radius:3px;padding:.1rem .4rem}
+.cmdk-list{max-height:340px;overflow-y:auto;padding:.4rem}
+.cmdk-item{display:flex;align-items:center;gap:.7rem;padding:.65rem .8rem;border-radius:5px;cursor:pointer;
+  font-size:.82rem;color:var(--text)}
+.cmdk-item .ico{color:var(--muted);width:16px;text-align:center;flex-shrink:0}
+.cmdk-item .lbl{flex:1}
+.cmdk-item .hint{font-size:.68rem;color:var(--muted)}
+.cmdk-item.sel{background:var(--amber-dim);color:var(--text-bright)}
+.cmdk-item.sel .ico{color:var(--amber)}
+.cmdk-empty{padding:1.2rem;text-align:center;color:var(--muted);font-size:.8rem}
 
-    /* ── PROJECTS ── */
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.1rem; }
-    .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: border-color 0.2s, transform 0.2s; display: flex; flex-direction: column; }
-    .project-card:hover { border-color: rgba(110,231,247,0.3); transform: translateY(-3px); }
-    .project-icon { width: 38px; height: 38px; background: rgba(110,231,247,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin-bottom: 0.9rem; }
-    .project-title { font-size: 0.97rem; font-weight: 600; margin-bottom: 0.45rem; color: var(--text); }
-    .project-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.65; margin-bottom: 1rem; flex: 1; }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-    .tag { font-family: var(--mono); font-size: 0.68rem; color: var(--accent2); background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.2); padding: 0.18rem 0.55rem; border-radius: 4px; }
+/* ══ HERO / TERMINAL ══ */
+.hero{min-height:100vh;display:flex;align-items:center;padding:9rem 1.5rem 4rem;position:relative}
+.hero-bg{position:absolute;inset:0;z-index:0;
+  background-image:radial-gradient(circle at 20% 20%,rgba(227,179,65,.06),transparent 45%),
+                    radial-gradient(circle at 80% 70%,rgba(88,166,255,.05),transparent 45%);}
+.hero-wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;width:100%}
+.term{background:var(--panel);border:1px solid var(--line-bright);border-radius:8px;overflow:hidden;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.7)}
+.term-head{display:flex;align-items:center;gap:.5rem;padding:.6rem .9rem;background:var(--panel2);border-bottom:1px solid var(--line)}
+.term-head .dots{margin-right:.4rem}
+.term-head span{font-size:.7rem;color:var(--muted)}
+.term-body{padding:1.6rem 1.4rem 1.8rem;min-height:260px}
+.term-line{display:flex;gap:.6rem;margin-bottom:.45rem;flex-wrap:wrap}
+.term-line .prompt{color:var(--green);flex-shrink:0}
+.term-line .path{color:var(--blue)}
+.term-line .cmd{color:var(--text-bright)}
+.term-out{color:var(--muted);padding-left:1.5rem;margin-bottom:.3rem;font-size:.86rem}
+.term-out .k{color:var(--amber)}
+.term-out .v{color:var(--text)}
+.cursor{display:inline-block;width:8px;height:1.1em;background:var(--amber);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.cursor{animation:none}}
 
-    /* ── SKILLS ── */
-    #skills { background: var(--bg2); }
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
-    .skill-group { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.3rem; }
-    .skill-group-title { font-size: 0.72rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
-    .skill-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .skill-pill { font-size: 0.78rem; color: var(--muted); background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 0.22rem 0.65rem; border-radius: 6px; }
+.hero-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.6rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.3rem;border-radius:5px;
+  font-family:var(--mono);font-size:.78rem;font-weight:600;text-decoration:none;cursor:pointer;
+  border:1px solid var(--line-bright);transition:all .15s;letter-spacing:.01em}
+.btn-primary{background:var(--amber);color:#1a1305;border-color:var(--amber)}
+.btn-primary:hover{background:#f0c75e;transform:translateY(-1px)}
+.btn-ghost{background:var(--panel);color:var(--text)}
+.btn-ghost:hover{border-color:var(--text);color:var(--text-bright);transform:translateY(-1px)}
+.btn-resume{background:var(--panel2);color:var(--green);border-color:var(--green)}
+.btn-resume:hover{background:rgba(63,185,80,.12);transform:translateY(-1px)}
 
-    /* ── EDUCATION ── */
-    .edu-grid { display: grid; gap: 1rem; }
-    .edu-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem 1.75rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
-    .edu-degree { font-size: 0.97rem; font-weight: 600; color: var(--text); }
-    .edu-school { font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem; }
-    .edu-period { font-family: var(--mono); font-size: 0.75rem; color: var(--accent2); white-space: nowrap; }
+.hero-stats{display:flex;gap:1px;margin-top:2rem;background:var(--line);border:1px solid var(--line)}
+.stat{flex:1;background:var(--panel);padding:1rem 1.1rem;text-align:left}
+.stat-n{display:block;font-size:1.5rem;font-weight:700;color:var(--amber)}
+.stat-l{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
 
-    /* ── CONTACT ── */
-    #contact { background: var(--bg2); text-align: center; }
-    .contact-links { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
+/* ══ SECTIONS ══ */
+section{padding:5rem 1.5rem;scroll-margin-top:90px}
+.wrap{max-width:880px;margin:0 auto}
+.file-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--muted);
+  margin-bottom:.6rem;letter-spacing:.02em}
+.file-tag .ext{color:var(--amber);font-weight:700}
+.sec-title{font-family:var(--sans);font-size:clamp(1.5rem,3.5vw,2rem);font-weight:600;color:var(--text-bright);
+  margin-bottom:2.2rem;letter-spacing:-.01em}
 
-    /* ── FOOTER ── */
-    footer { text-align: center; padding: 1.75rem; color: var(--muted); font-size: 0.78rem; border-top: 1px solid var(--border); font-family: var(--mono); }
+/* EXPERIENCE — git log style */
+#experience{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gitlog{border-left:2px solid var(--line-bright);padding-left:1.4rem;position:relative}
+.gitlog::before{content:'';position:absolute;left:-5px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 0 3px var(--panel)}
+.commit-meta{display:flex;gap:1rem;flex-wrap:wrap;align-items:baseline;margin-bottom:.5rem}
+.commit-hash{color:var(--amber);font-weight:700;font-size:.85rem}
+.commit-date{color:var(--muted);font-size:.75rem}
+.commit-title{font-family:var(--sans);font-size:1.15rem;font-weight:600;color:var(--text-bright);margin-bottom:.2rem}
+.commit-sub{color:var(--blue);font-size:.82rem;margin-bottom:1rem}
+.diff-list{list-style:none}
+.diff-list li{font-size:.86rem;padding:.3rem 0 .3rem 1.3rem;position:relative;color:var(--text);font-family:var(--mono)}
+.diff-list li::before{content:'+';position:absolute;left:0;color:var(--green);font-weight:700}
 
-    /* ════════════════════════════════════
-       RESUME VIEWER — MS Teams style
-       ════════════════════════════════════ */
-    .resume-viewer {
-      display: none; position: fixed; inset: 0; z-index: 1000;
-      flex-direction: column; background: #1a1a2e;
-    }
-    .resume-viewer.active { display: flex; }
+/* PROJECTS — code block style */
+.proj{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:1.1rem;overflow:hidden}
+.proj-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem 1.1rem;
+  background:var(--panel2);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.proj-filename{font-size:.78rem;color:var(--text-bright);font-weight:600;letter-spacing:.01em}
+.proj-filename .ic{color:var(--amber);margin-right:.5rem;font-size:.85rem}
+.proj-lang{font-size:.65rem;color:var(--amber);text-transform:uppercase;letter-spacing:.05em;
+  background:rgba(227,179,65,.08);border:1px solid var(--amber-dim);padding:.18rem .55rem;border-radius:4px}
+.proj-body{padding:1.1rem 1.3rem;display:grid;grid-template-columns:auto 1fr;gap:0 1rem}
+.ln{color:#3A4452;text-align:right;font-size:.78rem;user-select:none;line-height:1.85}
+.code{font-size:.84rem;line-height:1.85;color:var(--text)}
+.code .c1{color:var(--muted)}
+.code .s1{color:#A5D6A7}
+.code .fn{color:var(--blue)}
+.code .kw{color:#C586C0}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;padding:0 1.3rem 1.1rem}
+.proj-desc{font-family:var(--sans);font-size:.86rem;line-height:1.75;color:var(--text);
+  padding:0 1.3rem 1.1rem;border-top:1px solid var(--line);padding-top:1rem;margin-top:.2rem}
+.tag{font-size:.66rem;color:var(--amber);background:rgba(227,179,65,.08);border:1px solid var(--amber-dim);
+  padding:.18rem .55rem;border-radius:4px}
 
-    /* Toolbar */
-    .rv-toolbar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 1.25rem; height: 56px;
-      background: #0f1729;
-      border-bottom: 1px solid rgba(110,231,247,0.15);
-      flex-shrink: 0;
-    }
-    .rv-left { display: flex; align-items: center; gap: 0.85rem; }
-    .rv-pdf-badge {
-      width: 34px; height: 34px; border-radius: 7px;
-      background: linear-gradient(135deg, #e74c3c, #c0392b);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.6rem; font-weight: 800; color: #fff; letter-spacing: 0.03em;
-      flex-shrink: 0;
-    }
-    .rv-file-info {}
-    .rv-file-name { font-size: 0.88rem; font-weight: 600; color: var(--text); display: block; line-height: 1.2; }
-    .rv-file-sub { font-size: 0.7rem; color: var(--muted); font-family: var(--mono); }
-    .rv-right { display: flex; align-items: center; gap: 0.6rem; }
+/* SKILLS — yaml dump */
+#skills{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.yaml-block{background:var(--void);border:1px solid var(--line);border-radius:8px;padding:1.5rem 1.7rem;font-size:.85rem}
+.yaml-key{color:var(--amber);font-weight:600;min-width:120px}
+.yaml-row{display:flex;gap:.9rem;padding:.7rem 0;border-bottom:1px solid var(--line);flex-wrap:wrap;align-items:baseline}
+.yaml-row:last-child{border-bottom:none}
+.yaml-vals{display:flex;gap:.4rem;flex-wrap:wrap}
+.yaml-vals span{color:var(--text);font-size:.8rem;background:rgba(227,179,65,.06);
+  border:1px solid var(--line-bright);padding:.18rem .6rem;border-radius:4px}
+.yaml-vals span::before{content:none}
 
-    /* Toolbar buttons */
-    .rv-action-btn {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.42rem 1rem; border-radius: 7px;
-      font-family: var(--font); font-size: 0.8rem; font-weight: 600;
-      cursor: pointer; transition: all 0.18s; text-decoration: none; border: none;
-      white-space: nowrap;
-    }
-    .rv-dl-btn {
-      background: var(--accent); color: #0b0f17;
-    }
-    .rv-dl-btn:hover { background: #9ef7ff; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(110,231,247,0.25); }
-    .rv-close-btn {
-      background: rgba(255,255,255,0.06); color: var(--muted);
-      border: 1px solid rgba(255,255,255,0.1);
-      width: 36px; height: 36px; padding: 0; justify-content: center;
-      border-radius: 8px; font-size: 1rem;
-    }
-    .rv-close-btn:hover { background: rgba(255,60,60,0.15); color: #ff6b6b; border-color: rgba(255,60,60,0.3); }
+/* EDUCATION */
+.edu-row{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.5rem;
+  padding:1.2rem 0;border-bottom:1px solid var(--line)}
+.edu-row:first-child{border-top:1px solid var(--line)}
+.edu-deg{font-family:var(--sans);font-weight:600;color:var(--text-bright);font-size:1rem}
+.edu-school{color:var(--muted);font-size:.82rem;margin-top:.2rem}
+.edu-period{color:var(--amber);font-size:.78rem;white-space:nowrap}
 
-    /* Zoom bar */
-    .rv-zoombar {
-      display: flex; align-items: center; gap: 0.5rem;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 7px; padding: 0.2rem 0.5rem;
-    }
-    .rv-z-btn {
-      background: none; border: none; color: var(--muted); cursor: pointer;
-      font-size: 1rem; width: 24px; height: 24px;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 4px; transition: all 0.15s;
-    }
-    .rv-z-btn:hover { background: rgba(255,255,255,0.1); color: var(--text); }
-    .rv-z-label { font-family: var(--mono); font-size: 0.73rem; color: var(--text); min-width: 36px; text-align: center; }
+/* CONTACT */
+#contact{background:var(--void)}
+.contact-term{background:var(--panel);border:1px solid var(--line-bright);border-radius:8px;overflow:hidden}
+.contact-term .term-body{min-height:auto}
+.contact-links{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.4rem}
 
-    /* Canvas scroll area */
-    .rv-canvas-area {
-      flex: 1; overflow-y: auto; overflow-x: auto;
-      background: #23243a;
-      display: flex; flex-direction: column; align-items: center;
-      padding: 2rem 1rem 3rem; gap: 1.5rem;
-    }
-    .rv-canvas-area::-webkit-scrollbar { width: 8px; height: 8px; }
-    .rv-canvas-area::-webkit-scrollbar-track { background: #1a1a2e; }
-    .rv-canvas-area::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 4px; }
-    .rv-canvas-area::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.22); }
+footer{text-align:center;padding:1.4rem;color:var(--muted);font-size:.7rem;border-top:1px solid var(--line);
+  background:var(--panel)}
 
-    .rv-page {
-      box-shadow: 0 8px 40px rgba(0,0,0,0.55), 0 2px 8px rgba(0,0,0,0.3);
-      border-radius: 3px; overflow: hidden; line-height: 0; flex-shrink: 0;
-    }
-    .rv-page canvas { display: block; }
+/* ══ RESUME VIEWER ══ */
+.resume-viewer{display:none;position:fixed;inset:0;z-index:1000;flex-direction:column;background:#05070a}
+.resume-viewer.active{display:flex}
+.rv-toolbar{display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem;height:56px;
+  background:var(--panel);border-bottom:1px solid var(--line);flex-shrink:0}
+.rv-left{display:flex;align-items:center;gap:.85rem}
+.rv-pdf-badge{width:32px;height:32px;border-radius:5px;background:var(--amber);display:flex;align-items:center;
+  justify-content:center;font-size:.58rem;font-weight:800;color:#1a1305;flex-shrink:0}
+.rv-file-name{font-size:.84rem;font-weight:600;color:var(--text-bright);display:block;line-height:1.2}
+.rv-file-sub{font-size:.68rem;color:var(--muted)}
+.rv-right{display:flex;align-items:center;gap:.6rem}
+.rv-action-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.42rem 1rem;border-radius:5px;
+  font-family:var(--mono);font-size:.78rem;font-weight:600;cursor:pointer;transition:all .18s;text-decoration:none;
+  border:none;white-space:nowrap}
+.rv-dl-btn{background:var(--amber);color:#1a1305}
+.rv-dl-btn:hover{background:#f0c75e;transform:translateY(-1px)}
+.rv-close-btn{background:var(--panel2);color:var(--muted);border:1px solid var(--line-bright);width:34px;height:34px;
+  padding:0;justify-content:center;border-radius:5px;font-size:1rem}
+.rv-close-btn:hover{background:rgba(248,81,73,.15);color:var(--red);border-color:rgba(248,81,73,.3)}
+.rv-zoombar{display:flex;align-items:center;gap:.5rem;background:var(--void);border:1px solid var(--line);
+  border-radius:5px;padding:.2rem .5rem}
+.rv-z-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;width:24px;height:24px;
+  display:flex;align-items:center;justify-content:center;border-radius:4px}
+.rv-z-btn:hover{background:var(--panel2);color:var(--text)}
+.rv-z-label{font-size:.7rem;color:var(--text);min-width:36px;text-align:center}
+.rv-canvas-area{flex:1;overflow:auto;background:#05070a;display:flex;flex-direction:column;align-items:center;
+  padding:2rem 1rem 3rem;gap:1.5rem}
+.rv-canvas-area::-webkit-scrollbar{width:8px;height:8px}
+.rv-canvas-area::-webkit-scrollbar-track{background:var(--void)}
+.rv-canvas-area::-webkit-scrollbar-thumb{background:var(--line-bright);border-radius:4px}
+.rv-page{box-shadow:0 8px 40px rgba(0,0,0,.6);border-radius:3px;overflow:hidden;line-height:0;flex-shrink:0}
+.rv-page canvas{display:block}
+.rv-page-label{font-size:.68rem;color:var(--muted)}
+.rv-statusbar{display:flex;align-items:center;justify-content:center;gap:1.5rem;height:30px;background:var(--panel);
+  border-top:1px solid var(--line);font-size:.68rem;color:var(--muted);flex-shrink:0}
+.rv-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:5rem 2rem;
+  color:var(--muted);font-size:.85rem}
+.rv-spinner{width:36px;height:36px;border:3px solid var(--line);border-top-color:var(--amber);border-radius:50%;
+  animation:spin .75s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-    /* Page label between pages */
-    .rv-page-label {
-      font-family: var(--mono); font-size: 0.7rem; color: rgba(255,255,255,0.25);
-      letter-spacing: 0.06em;
-    }
+/* ══ MOBILE / TABLET ══ */
+@media (max-width:768px){
+  /* chrome / nav */
+  .titlebar{padding:.6rem .85rem}
+  .titlebar-path{display:none}
+  .icon-btn,.ham{display:inline-flex;align-items:center;justify-content:center}
+  .tabstrip{display:none}
+  .tab-cmd{display:none}
 
-    /* Status bar */
-    .rv-statusbar {
-      display: flex; align-items: center; justify-content: center; gap: 1.5rem;
-      height: 32px; padding: 0 1.25rem;
-      background: #0f1729;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      font-family: var(--mono); font-size: 0.7rem; color: var(--muted);
-      flex-shrink: 0;
-    }
+  /* hero */
+  .hero{padding:6.5rem 1rem 2.6rem;min-height:auto}
+  .term-body{padding:1.1rem .9rem 1.3rem;min-height:200px}
+  .term-line,.term-out{font-size:.82rem}
+  .hero-actions{gap:.55rem}
+  .hero-actions .btn{padding:.6rem 1rem;font-size:.74rem;flex:1 1 auto;justify-content:center}
+  .hero-stats{flex-wrap:wrap;gap:1px}
+  .stat{flex:1 1 45%;padding:.85rem .9rem}
+  .stat-n{font-size:1.3rem}
 
-    /* Loading */
-    .rv-loading {
-      display: flex; flex-direction: column; align-items: center;
-      justify-content: center; gap: 1rem; padding: 5rem 2rem;
-      color: var(--muted); font-size: 0.9rem;
-    }
-    .rv-spinner {
-      width: 38px; height: 38px;
-      border: 3px solid rgba(110,231,247,0.12);
-      border-top-color: var(--accent);
-      border-radius: 50%; animation: spin 0.75s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
+  /* sections */
+  section{padding:2.8rem 1rem}
+  .sec-title{margin-bottom:1.6rem}
+  .wrap{max-width:100%}
 
-    /* ── MOBILE ── */
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.25rem; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      .hero { padding: 6rem 1.25rem 3rem; }
-      .hero-actions { gap: 0.6rem; }
-      .hero-actions .btn { padding: 0.65rem 1.1rem; font-size: 0.83rem; }
-      .hero-stats { gap: 1.5rem; padding-top: 2rem; margin-top: 2.5rem; }
-      .stat-num { font-size: 1.5rem; }
-      section { padding: 3.5rem 1.25rem; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .skills-grid { grid-template-columns: 1fr; }
-      .edu-card { flex-direction: column; align-items: flex-start; }
-      .rv-file-sub { display: none; }
-      .rv-zoombar { display: none; }
-      .rv-action-btn span { display: none; }
-      .rv-dl-btn { padding: 0.42rem 0.65rem; }
-    }
-    @media (max-width: 480px) {
-      .hero-name { font-size: 2.2rem; }
-      .section-title { font-size: 1.5rem; }
-      .contact-links .btn { width: 100%; justify-content: center; }
-    }
-  </style>
+  /* experience */
+  .gitlog{padding-left:1.1rem}
+  .commit-meta{gap:.5rem;flex-direction:column;align-items:flex-start}
+  .commit-title{font-size:1.02rem}
+
+  /* projects */
+  .proj-head{padding:.65rem .9rem}
+  .proj-filename{font-size:.74rem}
+  .proj-body{grid-template-columns:1fr;padding:.95rem 1rem}
+  .ln{display:none}
+  .code{font-size:.78rem;word-break:break-word;white-space:pre-wrap}
+  .proj-desc{font-size:.82rem;padding:0 1rem 1rem;padding-top:.85rem}
+  .proj-tags{padding:0 1rem 1rem}
+
+  /* skills */
+  .yaml-block{padding:1.1rem 1.2rem;font-size:.8rem}
+  .yaml-row{flex-direction:column;align-items:flex-start;gap:.4rem}
+
+  /* education */
+  .edu-row{flex-direction:column;align-items:flex-start;gap:.3rem}
+
+  /* contact */
+  .contact-links{flex-direction:column}
+  .contact-links .btn{justify-content:center}
+
+  /* resume viewer toolbar */
+  .rv-toolbar{padding:0 .8rem;height:52px}
+  .rv-file-sub{display:none}
+  .rv-file-name{font-size:.78rem}
+  .rv-zoombar{display:none}
+  .rv-action-btn span{display:none}
+  .rv-action-btn{padding:.4rem .7rem}
+  .rv-canvas-area{padding:1.2rem .5rem 2rem}
+
+  /* command palette */
+  .cmdk-overlay{align-items:flex-end;padding:0}
+  .cmdk-box{width:100%;border-radius:14px 14px 0 0;max-height:80vh;display:flex;flex-direction:column}
+  .cmdk-list{max-height:60vh}
+  .cmdk-item{padding:.85rem .9rem}
+  .cmdk-item .hint{display:none}
+}
+
+@media (max-width:420px){
+  .hero-actions .btn{flex:1 1 100%}
+  .stat{flex:1 1 100%}
+}
+</style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════
-     RESUME VIEWER (MS Teams style)
-     ══════════════════════════════════ -->
-<div class="resume-viewer" id="resumeViewer">
+<div class="noise"></div>
 
-  <!-- Top toolbar -->
+<!-- ══ RESUME VIEWER ══ -->
+<div class="resume-viewer" id="resumeViewer">
   <div class="rv-toolbar">
     <div class="rv-left">
       <div class="rv-pdf-badge">PDF</div>
-      <div class="rv-file-info">
+      <div>
         <span class="rv-file-name">Meet_Dodiya_Resume.pdf</span>
-        <span class="rv-file-sub">Resume · AI Engineer</span>
+        <span class="rv-file-sub">Resume · Junior AI Engineer</span>
       </div>
     </div>
     <div class="rv-right">
-      <!-- Zoom controls -->
       <div class="rv-zoombar">
         <button class="rv-z-btn" onclick="zoom(-0.2)" title="Zoom out">−</button>
         <span class="rv-z-label" id="zoomLabel">100%</span>
-        <button class="rv-z-btn" onclick="zoom(+0.2)" title="Zoom in">+</button>
+        <button class="rv-z-btn" onclick="zoom(0.2)" title="Zoom in">+</button>
       </div>
-      <!-- Download -->
-      <a href="Meet_Dodiya_Resume_AI.pdf" download="Meet_Dodiya_Resume.pdf" class="rv-action-btn rv-dl-btn">
-        ⬇ <span>Download</span>
-      </a>
-      <!-- Close -->
+      <a href="Meet_Dodiya_Resume_AI.pdf" download="Meet_Dodiya_Resume.pdf" class="rv-action-btn rv-dl-btn">⬇ <span>Download</span></a>
       <button class="rv-close-btn rv-action-btn" onclick="closeViewer()" title="Close (Esc)">✕</button>
     </div>
   </div>
-
-  <!-- PDF pages -->
   <div class="rv-canvas-area" id="rvCanvas">
     <div class="rv-loading" id="rvLoading">
       <div class="rv-spinner"></div>
       <span>Loading resume...</span>
     </div>
   </div>
+  <div class="rv-statusbar"><span id="rvStatus">Loading...</span></div>
+</div>
 
-  <!-- Status bar -->
-  <div class="rv-statusbar">
-    <span id="rvStatus">Loading...</span>
+<!-- ══ COMMAND PALETTE ══ -->
+<div class="cmdk-overlay" id="cmdkOverlay">
+  <div class="cmdk-box">
+    <div class="cmdk-input-row">
+      <span class="cmdk-prompt">&gt;</span>
+      <input class="cmdk-input" id="cmdkInput" placeholder="Type a command or search…" autocomplete="off" />
+      <span class="cmdk-esc">ESC</span>
+    </div>
+    <div class="cmdk-list" id="cmdkList"></div>
   </div>
 </div>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">meet.dodiya</div>
-  <ul class="nav-links">
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#experience" onclick="closeMobileMenu()">Experience</a>
-  <a href="#projects" onclick="closeMobileMenu()">Projects</a>
-  <a href="#skills" onclick="closeMobileMenu()">Skills</a>
-  <a href="#education" onclick="closeMobileMenu()">Education</a>
-  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+<!-- ══ CHROME / TABS ══ -->
+<div class="chrome">
+  <div class="titlebar">
+    <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+    <span class="titlebar-path"><b>meet.dodiya</b> — junior-ai-engineer-portfolio — ~/about</span>
+    <div class="titlebar-actions">
+      <button class="icon-btn" id="mobileSearchBtn" aria-label="Open command palette">⌘K</button>
+      <button class="ham" id="hamBtn" aria-label="Menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+  <div class="tabstrip" id="tabstrip">
+    <a href="#hero" class="tab active" data-target="hero"><span class="dot-status"></span><span class="lbl">profile.sh</span></a>
+    <a href="#experience" class="tab" data-target="experience"><span class="dot-status"></span><span class="lbl">experience.log</span></a>
+    <a href="#projects" class="tab" data-target="projects"><span class="dot-status"></span><span class="lbl">projects/</span></a>
+    <a href="#skills" class="tab" data-target="skills"><span class="dot-status"></span><span class="lbl">skills.yaml</span></a>
+    <a href="#education" class="tab" data-target="education"><span class="dot-status"></span><span class="lbl">education.md</span></a>
+    <a href="#contact" class="tab" data-target="contact"><span class="dot-status"></span><span class="lbl">contact.sh</span></a>
+    <div class="tab-cmd" id="cmdkOpenBtn"><span class="kbd-wrap">⌘K</span><span>command palette</span></div>
+  </div>
+  <div class="mobile-dropdown" id="mobileDropdown">
+    <a href="#hero" class="m-link" data-target="hero">profile.sh</a>
+    <a href="#experience" class="m-link" data-target="experience">experience.log</a>
+    <a href="#projects" class="m-link" data-target="projects">projects/</a>
+    <a href="#skills" class="m-link" data-target="skills">skills.yaml</a>
+    <a href="#education" class="m-link" data-target="education">education.md</a>
+    <a href="#contact" class="m-link" data-target="contact">contact.sh</a>
+  </div>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-content">
-    <div class="hero-tag">&#x2022; Open to opportunities</div>
-    <h1 class="hero-name">Meet <span>Dodiya</span></h1>
-    <p class="hero-role">Junior AI Engineer &nbsp;·&nbsp; Ahmedabad, Gujarat</p>
-    <p class="hero-summary">
-      Building LLM-powered applications, RAG systems, and scalable backend APIs using FastAPI.
-      4+ production-grade AI solutions — conversational AI, medical report generation, and NL-to-SQL engines.
-    </p>
-    <div class="hero-actions">
-      <a href="mailto:meetdodiya711879@gmail.com" class="btn btn-primary">✉ Get in touch</a>
-      <button onclick="openViewer()" class="btn btn-resume">📄 View Resume</button>
-      <a href="https://github.com/meet-dodiya1710" target="_blank" class="btn btn-outline">GitHub →</a>
-      <a href="https://www.linkedin.com/in/meet-dodiya-7b30812ba/" target="_blank" class="btn btn-outline">LinkedIn →</a>
+<!-- ══ HERO ══ -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-wrap">
+    <div class="term">
+      <div class="term-head">
+        <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+        <span>zsh — profile.sh</span>
+      </div>
+      <div class="term-body" id="termBody"></div>
     </div>
+
+    <div class="hero-actions">
+      <a href="mailto:meetdodiya711879@gmail.com" class="btn btn-primary">✉ get in touch</a>
+      <button onclick="openViewer()" class="btn btn-resume">📄 view résumé</button>
+      <a href="https://github.com/meet-dodiya1710" target="_blank" class="btn btn-ghost">github →</a>
+      <a href="https://www.linkedin.com/in/meet-dodiya-7b30812ba/" target="_blank" class="btn btn-ghost">linkedin →</a>
+    </div>
+
     <div class="hero-stats">
-      <div class="stat-item"><span class="stat-num">4+</span><span class="stat-label">Production AI apps</span></div>
-      <div class="stat-item"><span class="stat-num">90%</span><span class="stat-label">Report time saved</span></div>
-      <div class="stat-item"><span class="stat-num">98%</span><span class="stat-label">ML model accuracy</span></div>
+      <div class="stat"><span class="stat-n">4+</span><span class="stat-l">production AI apps</span></div>
+      <div class="stat"><span class="stat-n">90%</span><span class="stat-l">report time saved</span></div>
+      <div class="stat"><span class="stat-n">98%</span><span class="stat-l">ML model accuracy</span></div>
     </div>
   </div>
 </section>
 
-<!-- EXPERIENCE -->
+<!-- ══ EXPERIENCE ══ -->
 <section id="experience">
-  <div class="container">
-    <p class="section-eyebrow">// work history</p>
-    <h2 class="section-title">Experience</h2>
-    <div class="exp-card">
-      <div class="exp-header">
-        <div>
-          <div class="exp-company">Evolvision Technologies</div>
-          <div class="exp-role">AI Engineer</div>
-        </div>
-        <span class="exp-period">Apr 2025 – Present</span>
+  <div class="wrap">
+    <div class="file-tag"><span class="ext">LOG</span> experience.log</div>
+    <h2 class="sec-title">Work history</h2>
+    <div class="gitlog">
+      <div class="commit-meta">
+        <span class="commit-hash">#a1f9e3c</span>
+        <span class="commit-date">Jul 2025 — Present</span>
       </div>
-      <ul class="exp-points">
+      <div class="commit-title">Evolvision Technologies</div>
+      <div class="commit-sub">Junior AI Engineer</div>
+      <ul class="diff-list">
         <li>Developed 4 Generative AI and LLM-powered applications using FastAPI, OpenAI, Groq, and Ollama</li>
         <li>Built scalable backend services, REST APIs, and AI automation solutions for enterprise clients</li>
         <li>Worked on RAG systems, conversational AI, report generation, and intelligent document processing platforms</li>
@@ -397,195 +447,389 @@
   </div>
 </section>
 
-<!-- PROJECTS -->
+<!-- ══ PROJECTS ══ -->
 <section id="projects">
-  <div class="container">
-    <p class="section-eyebrow">// what i've built</p>
-    <h2 class="section-title">Projects</h2>
-    <div class="projects-grid">
-      <div class="project-card">
-        <div class="project-icon">🧠</div>
-        <div class="project-title">Enterprise RAG Knowledge Assistant</div>
-        <div class="project-desc">RAG chatbot for enterprise knowledge retrieval with document chunking, embedding generation, semantic search, and context-aware response pipelines.</div>
-        <div class="project-tags"><span class="tag">GPT-4o-mini</span><span class="tag">ChromaDB</span><span class="tag">FastAPI</span><span class="tag">RAG</span></div>
+  <div class="wrap">
+    <div class="file-tag"><span class="ext">DIR</span> projects/</div>
+    <h2 class="sec-title">What I've built</h2>
+
+    <div class="proj">
+      <div class="proj-head">
+        <span class="proj-filename"><span class="ic">▸</span>Enterprise RAG Knowledge Assistant</span>
+        <span class="proj-lang">enterprise rag</span>
       </div>
-      <div class="project-card">
-        <div class="project-icon">🏥</div>
-        <div class="project-title">AI Kidney Health Report Generator</div>
-        <div class="project-desc">Reduced medical report generation time by 90%+ (20–30 min → 2–3 min per patient) with multilingual support via Sarvam AI translation.</div>
-        <div class="project-tags"><span class="tag">GPT-4o-mini</span><span class="tag">FastAPI</span><span class="tag">MySQL</span><span class="tag">Sarvam AI</span></div>
+      <div class="proj-body">
+        <div class="ln">1<br>2<br>3</div>
+        <div class="code"><span class="kw">def</span> <span class="fn">answer</span>(query): <span class="c1">→ retrieves, embeds, responds</span><br><span class="c1"># chunking · embeddings · semantic search</span><br><span class="c1"># context-aware response pipeline</span></div>
       </div>
-      <div class="project-card">
-        <div class="project-icon">🗄️</div>
-        <div class="project-title">Natural Language → SQL Engine</div>
-        <div class="project-desc">NL-to-SQL system using LLMs via OpenRouter enabling non-technical users to query 4 database tables through plain English conversational prompts.</div>
-        <div class="project-tags"><span class="tag">OpenRouter</span><span class="tag">FastAPI</span><span class="tag">LLM</span><span class="tag">SQL</span></div>
+      <p class="proj-desc">A retrieval-augmented chatbot built for enterprise knowledge bases. Documents are chunked and embedded, then matched against incoming queries with semantic search so the model answers using the company's own data instead of guessing. Designed to plug into internal docs, wikis, and support knowledge bases where accuracy matters more than general chit-chat.</p>
+      <div class="proj-tags"><span class="tag">GPT-4o-mini</span><span class="tag">ChromaDB</span><span class="tag">FastAPI</span><span class="tag">RAG</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-head">
+        <span class="proj-filename"><span class="ic">▸</span>AI Kidney Health Report Generator</span>
+        <span class="proj-lang">healthtech</span>
       </div>
-      <div class="project-card">
-        <div class="project-icon">📈</div>
-        <div class="project-title">Marketing Conversion Predictor</div>
-        <div class="project-desc">ML classification system trained on 1,000+ customer records. XGBoost model hit 98% accuracy, deployed via FastAPI + Streamlit real-time dashboard.</div>
-        <div class="project-tags"><span class="tag">XGBoost</span><span class="tag">FastAPI</span><span class="tag">Streamlit</span><span class="tag">ML</span></div>
+      <div class="proj-body">
+        <div class="ln">1<br>2<br>3</div>
+        <div class="code"><span class="kw">def</span> <span class="fn">generate_report</span>(patient): <span class="c1">→ 20–30 min cut to 2–3 min</span><br><span class="c1"># multilingual output via Sarvam AI</span><br><span class="c1"># structured storage in MySQL</span></div>
       </div>
+      <p class="proj-desc">Automates kidney health report writing for clinicians, turning a 20–30 minute manual task into a 2–3 minute generated draft. Patient data and lab values feed an LLM pipeline that drafts a structured report, stores it in MySQL, and translates it into the patient's preferred language via Sarvam AI — so reports stay accessible across regional languages without extra staff time.</p>
+      <div class="proj-tags"><span class="tag">GPT-4o-mini</span><span class="tag">FastAPI</span><span class="tag">MySQL</span><span class="tag">Sarvam AI</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-head">
+        <span class="proj-filename"><span class="ic">▸</span>Natural Language → SQL Engine</span>
+        <span class="proj-lang">data tooling</span>
+      </div>
+      <div class="proj-body">
+        <div class="ln">1<br>2<br>3</div>
+        <div class="code"><span class="kw">def</span> <span class="fn">to_sql</span>(prompt): <span class="c1">→ queries 4 tables in plain English</span><br><span class="c1"># LLM routing via OpenRouter</span><br><span class="c1"># no SQL knowledge required</span></div>
+      </div>
+      <p class="proj-desc">Lets non-technical teammates query a database in plain English instead of writing SQL. A user types a question, an LLM (routed through OpenRouter) converts it into a valid query against 4 connected tables, runs it, and returns the result conversationally — removing the dependency on an engineer for everyday data lookups.</p>
+      <div class="proj-tags"><span class="tag">OpenRouter</span><span class="tag">FastAPI</span><span class="tag">LLM</span><span class="tag">SQL</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-head">
+        <span class="proj-filename"><span class="ic">▸</span>Marketing Conversion Predictor</span>
+        <span class="proj-lang">classification ML</span>
+      </div>
+      <div class="proj-body">
+        <div class="ln">1<br>2<br>3</div>
+        <div class="code"><span class="kw">model</span> = XGBoost(records=<span class="s1">'1,000+'</span>) <span class="c1">→ 98% accuracy</span><br><span class="c1"># deployed via FastAPI</span><br><span class="c1"># live dashboard in Streamlit</span></div>
+      </div>
+      <p class="proj-desc">A classification model that predicts which leads are likely to convert, trained on 1,000+ historical customer records with engineered behavioral and demographic features. The XGBoost model reached 98% accuracy and ships behind a FastAPI endpoint, with a Streamlit dashboard so the marketing team can score leads and watch results update in real time.</p>
+      <div class="proj-tags"><span class="tag">XGBoost</span><span class="tag">FastAPI</span><span class="tag">Streamlit</span><span class="tag">ML</span></div>
     </div>
   </div>
 </section>
 
-<!-- SKILLS -->
+<!-- ══ SKILLS ══ -->
 <section id="skills">
-  <div class="container">
-    <p class="section-eyebrow">// tech stack</p>
-    <h2 class="section-title">Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <div class="skill-group-title">Backend Development</div>
-        <div class="skill-pills"><span class="skill-pill">Python</span><span class="skill-pill">FastAPI</span><span class="skill-pill">REST APIs</span><span class="skill-pill">Async Programming</span><span class="skill-pill">Auth & Authorization</span></div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Generative AI & LLMs</div>
-        <div class="skill-pills"><span class="skill-pill">OpenAI</span><span class="skill-pill">Anthropic</span><span class="skill-pill">Groq</span><span class="skill-pill">Ollama</span><span class="skill-pill">OpenRouter</span><span class="skill-pill">RAG</span><span class="skill-pill">Prompt Engineering</span></div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">AI & Machine Learning</div>
-        <div class="skill-pills"><span class="skill-pill">Machine Learning</span><span class="skill-pill">NLP</span><span class="skill-pill">OCR</span><span class="skill-pill">Classification Models</span><span class="skill-pill">Feature Engineering</span></div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Databases</div>
-        <div class="skill-pills"><span class="skill-pill">MySQL</span><span class="skill-pill">PostgreSQL</span><span class="skill-pill">ChromaDB</span><span class="skill-pill">OpenAI Embeddings</span></div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Speech AI</div>
-        <div class="skill-pills"><span class="skill-pill">Deepgram STT</span><span class="skill-pill">Deepgram TTS</span><span class="skill-pill">Sarvam AI</span></div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Tools & Version Control</div>
-        <div class="skill-pills"><span class="skill-pill">Git</span><span class="skill-pill">GitHub</span><span class="skill-pill">Cursor</span><span class="skill-pill">Windsurf</span><span class="skill-pill">Claude Code</span></div>
-      </div>
+  <div class="wrap">
+    <div class="file-tag"><span class="ext">YML</span> skills.yaml</div>
+    <h2 class="sec-title">Tech stack</h2>
+    <div class="yaml-block">
+      <div class="yaml-row"><span class="yaml-key">backend:</span><div class="yaml-vals"><span>Python</span><span>FastAPI</span><span>REST APIs</span><span>Async Programming</span><span>Auth & Authorization</span></div></div>
+      <div class="yaml-row"><span class="yaml-key">genai_llms:</span><div class="yaml-vals"><span>OpenAI</span><span>Anthropic</span><span>Groq</span><span>Ollama</span><span>OpenRouter</span><span>RAG</span><span>Prompt Engineering</span></div></div>
+      <div class="yaml-row"><span class="yaml-key">ml_ai:</span><div class="yaml-vals"><span>Machine Learning</span><span>NLP</span><span>OCR</span><span>Classification Models</span><span>Feature Engineering</span></div></div>
+      <div class="yaml-row"><span class="yaml-key">databases:</span><div class="yaml-vals"><span>MySQL</span><span>PostgreSQL</span><span>ChromaDB</span><span>OpenAI Embeddings</span></div></div>
+      <div class="yaml-row"><span class="yaml-key">speech_ai:</span><div class="yaml-vals"><span>Deepgram STT</span><span>Deepgram TTS</span><span>Sarvam AI</span></div></div>
+      <div class="yaml-row"><span class="yaml-key">tooling:</span><div class="yaml-vals"><span>Git</span><span>GitHub</span><span>Cursor</span><span>Windsurf</span><span>Claude Code</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- EDUCATION -->
+<!-- ══ EDUCATION ══ -->
 <section id="education">
-  <div class="container">
-    <p class="section-eyebrow">// background</p>
-    <h2 class="section-title">Education</h2>
-    <div class="edu-grid">
-      <div class="edu-card">
-        <div><div class="edu-degree">Master Diploma in Data Science & AI</div><div class="edu-school">Boston Institute of Analytics</div></div>
-        <div class="edu-period">Jun 2024 – Dec 2024</div>
-      </div>
-      <div class="edu-card">
-        <div><div class="edu-degree">Bachelor of Computer Applications (BCA)</div><div class="edu-school">Maharaja Krishnakumarsinhji Bhavnagar University</div></div>
-        <div class="edu-period">Sep 2021 – Apr 2024</div>
-      </div>
+  <div class="wrap">
+    <div class="file-tag"><span class="ext">MD</span> education.md</div>
+    <h2 class="sec-title">Background</h2>
+    <div class="edu-row">
+      <div><div class="edu-deg">Master Diploma in Data Science & AI</div><div class="edu-school">Boston Institute of Analytics</div></div>
+      <div class="edu-period">Jun 2024 → Dec 2024</div>
+    </div>
+    <div class="edu-row">
+      <div><div class="edu-deg">Bachelor of Computer Applications (BCA)</div><div class="edu-school">Maharaja Krishnakumarsinhji Bhavnagar University</div></div>
+      <div class="edu-period">Sep 2021 → Apr 2024</div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- ══ CONTACT ══ -->
 <section id="contact">
-  <div class="container">
-    <p class="section-eyebrow">// let's talk</p>
-    <h2 class="section-title">Get in Touch</h2>
-    <p style="color:var(--muted); max-width:480px; margin:0 auto; font-size:0.95rem;">
-      I'm actively looking for AI engineering roles. Whether it's about a project, a job, or just a chat about LLMs — reach out.
-    </p>
+  <div class="wrap">
+    <div class="file-tag"><span class="ext">SH</span> contact.sh</div>
+    <h2 class="sec-title">Get in touch</h2>
+    <div class="contact-term">
+      <div class="term-head">
+        <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+        <span>zsh — contact.sh</span>
+      </div>
+      <div class="term-body">
+        <div class="term-line"><span class="prompt">❯</span><span class="cmd">cat status.txt</span></div>
+        <div class="term-out">Actively looking for AI engineering roles. Open to projects, full-time work, or just a conversation about LLMs.</div>
+      </div>
+    </div>
     <div class="contact-links">
       <a href="mailto:meetdodiya711879@gmail.com" class="btn btn-primary">✉ meetdodiya711879@gmail.com</a>
-      <button onclick="openViewer()" class="btn btn-resume">📄 View Resume</button>
-      <a href="https://github.com/meet-dodiya1710" target="_blank" class="btn btn-outline">GitHub →</a>
-      <a href="https://www.linkedin.com/in/meet-dodiya-7b30812ba/" target="_blank" class="btn btn-outline">LinkedIn →</a>
+      <button onclick="openViewer()" class="btn btn-resume">📄 view résumé</button>
+      <a href="https://github.com/meet-dodiya1710" target="_blank" class="btn btn-ghost">github →</a>
+      <a href="https://www.linkedin.com/in/meet-dodiya-7b30812ba/" target="_blank" class="btn btn-ghost">linkedin →</a>
     </div>
   </div>
 </section>
 
-<footer><p>Built by Meet Dodiya &nbsp;·&nbsp; 2026</p></footer>
+<footer>built by meet dodiya · 2026 · press ⌘K / ctrl-K anywhere</footer>
 
 <!-- PDF.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
-  pdfjsLib.GlobalWorkerOptions.workerSrc =
-    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+const PDF_FILE='Meet_Dodiya_Resume_AI.pdf';
+let pdfDoc=null,scale=1.5,rendered=false;const BASE_SCALE=1.5;
 
-  const PDF_FILE = 'Meet_Dodiya_Resume_AI.pdf';
-  let pdfDoc   = null;
-  let scale    = 1.5;
-  let rendered = false;
-  const BASE_SCALE = 1.5;
+async function renderAll(){
+  const area=document.getElementById('rvCanvas'),loading=document.getElementById('rvLoading');
+  try{
+    pdfDoc=await pdfjsLib.getDocument(PDF_FILE).promise;
+    loading.remove();
+    document.getElementById('rvStatus').textContent=`${pdfDoc.numPages} page${pdfDoc.numPages>1?'s':''} · PDF`;
+    await drawPages(area);
+  }catch(e){
+    loading.innerHTML=`<p style="color:#6E7681;text-align:center;line-height:1.9">⚠️ Could not load resume.<br><small>Make sure <strong>${PDF_FILE}</strong> is in your GitHub repo.</small></p>
+      <a href="${PDF_FILE}" download class="rv-action-btn rv-dl-btn" style="margin-top:.5rem">⬇ Download instead</a>`;
+  }
+}
+async function drawPages(area){
+  area.querySelectorAll('.rv-page,.rv-page-label').forEach(el=>el.remove());
+  for(let i=1;i<=pdfDoc.numPages;i++){
+    if(i>1){const lbl=document.createElement('div');lbl.className='rv-page-label';lbl.textContent=`Page ${i} of ${pdfDoc.numPages}`;area.appendChild(lbl);}
+    const page=await pdfDoc.getPage(i),viewport=page.getViewport({scale});
+    const wrap=document.createElement('div');wrap.className='rv-page';
+    const canvas=document.createElement('canvas');canvas.width=viewport.width;canvas.height=viewport.height;
+    wrap.appendChild(canvas);area.appendChild(wrap);
+    await page.render({canvasContext:canvas.getContext('2d'),viewport}).promise;
+  }
+}
+function zoom(delta){
+  const next=Math.min(3.0,Math.max(0.5,scale+delta));
+  if(next===scale)return;
+  scale=next;
+  document.getElementById('zoomLabel').textContent=Math.round((scale/BASE_SCALE)*100)+'%';
+  if(pdfDoc)drawPages(document.getElementById('rvCanvas'));
+}
+function openViewer(){
+  document.getElementById('resumeViewer').classList.add('active');
+  document.body.style.overflow='hidden';
+  if(!rendered){rendered=true;renderAll();}
+}
+function closeViewer(){
+  document.getElementById('resumeViewer').classList.remove('active');
+  document.body.style.overflow='';
+}
 
-  /* ── Render all pages ── */
-  async function renderAll() {
-    const area    = document.getElementById('rvCanvas');
-    const loading = document.getElementById('rvLoading');
-    try {
-      pdfDoc = await pdfjsLib.getDocument(PDF_FILE).promise;
-      loading.remove();
-      document.getElementById('rvStatus').textContent =
-        `${pdfDoc.numPages} page${pdfDoc.numPages > 1 ? 's' : ''} · PDF`;
-      await drawPages(area);
-    } catch (e) {
-      loading.innerHTML = `
-        <p style="color:var(--muted);text-align:center;line-height:1.9">
-          ⚠️ Could not load resume.<br>
-          <small>Make sure <strong>${PDF_FILE}</strong> is in your GitHub repo.</small>
-        </p>
-        <a href="${PDF_FILE}" download class="rv-action-btn rv-dl-btn" style="margin-top:.5rem">⬇ Download instead</a>`;
+/* ══ TYPING TERMINAL INTRO ══ */
+const termBody=document.getElementById('termBody');
+const introLines=[
+  {type:'cmd',path:'~/meet-dodiya',cmd:'whoami'},
+  {type:'out',html:'<span class="k">name</span>      <span class="v">Meet Dodiya</span>'},
+  {type:'out',html:'<span class="k">role</span>      <span class="v">Junior AI Engineer</span>'},
+  {type:'out',html:'<span class="k">location</span>  <span class="v">Ahmedabad, Gujarat</span>'},
+  {type:'out',html:'<span class="k">status</span>    <span class="v" style="color:#3FB950">● open to opportunities</span>'},
+  {type:'cmd',path:'~/meet-dodiya',cmd:'cat summary.txt'},
+  {type:'out',html:'Building LLM-powered applications, RAG systems, and scalable backend\nAPIs using FastAPI — 4+ production-grade AI solutions spanning\nconversational AI, medical report generation, and NL-to-SQL engines.',multiline:true}
+];
+
+let lineIdx=0;
+function typeChar(el,text,cb,speed=18){
+  let i=0;
+  const iv=setInterval(()=>{
+    el.textContent+=text[i];
+    i++;
+    if(i>=text.length){clearInterval(iv);cb&&cb();}
+  },speed);
+}
+function renderNextLine(){
+  if(lineIdx>=introLines.length){
+    const cur=document.createElement('span');cur.className='cursor';
+    termBody.appendChild(cur);
+    return;
+  }
+  const item=introLines[lineIdx];
+  if(item.type==='cmd'){
+    const row=document.createElement('div');row.className='term-line';
+    row.innerHTML=`<span class="prompt">❯</span><span class="path">${item.path}</span><span class="cmd"></span>`;
+    termBody.appendChild(row);
+    const cmdEl=row.querySelector('.cmd');
+    typeChar(cmdEl,item.cmd,()=>{lineIdx++;setTimeout(renderNextLine,180);},26);
+  }else{
+    const row=document.createElement('div');
+    row.className='term-out';
+    if(item.multiline)row.style.whiteSpace='pre-line';
+    termBody.appendChild(row);
+    if(item.multiline){
+      row.textContent=item.html;
+      lineIdx++;setTimeout(renderNextLine,80);
+    }else{
+      row.innerHTML=item.html;
+      lineIdx++;setTimeout(renderNextLine,60);
     }
   }
+}
+renderNextLine();
 
-  async function drawPages(area) {
-    area.querySelectorAll('.rv-page, .rv-page-label').forEach(el => el.remove());
-    for (let i = 1; i <= pdfDoc.numPages; i++) {
-      if (i > 1) {
-        const lbl = document.createElement('div');
-        lbl.className = 'rv-page-label';
-        lbl.textContent = `Page ${i} of ${pdfDoc.numPages}`;
-        area.appendChild(lbl);
-      }
-      const page     = await pdfDoc.getPage(i);
-      const viewport = page.getViewport({ scale });
-      const wrap     = document.createElement('div');
-      wrap.className = 'rv-page';
-      const canvas   = document.createElement('canvas');
-      canvas.width   = viewport.width;
-      canvas.height  = viewport.height;
-      wrap.appendChild(canvas);
-      area.appendChild(wrap);
-      await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
-    }
-  }
-
-  /* ── Zoom ── */
-  function zoom(delta) {
-    const next = Math.min(3.0, Math.max(0.5, scale + delta));
-    if (next === scale) return;
-    scale = next;
-    document.getElementById('zoomLabel').textContent =
-      Math.round((scale / BASE_SCALE) * 100) + '%';
-    if (pdfDoc) drawPages(document.getElementById('rvCanvas'));
-  }
-
-  /* ── Open / Close ── */
-  function openViewer() {
-    document.getElementById('resumeViewer').classList.add('active');
-    document.body.style.overflow = 'hidden';
-    if (!rendered) { rendered = true; renderAll(); }
-  }
-  function closeViewer() {
-    document.getElementById('resumeViewer').classList.remove('active');
-    document.body.style.overflow = '';
-  }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeViewer(); });
-
-  /* ── Hamburger ── */
-  const hamburger  = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-  function closeMobileMenu() { mobileMenu.classList.remove('open'); }
-  document.addEventListener('click', e => {
-    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMobileMenu();
+/* ══ TAB NAV — scroll + active state ══ */
+const tabs=document.querySelectorAll('.tab');
+const sections=['hero','experience','projects','skills','education','contact'].map(id=>document.getElementById(id));
+tabs.forEach(tab=>{
+  tab.addEventListener('click',e=>{
+    e.preventDefault();
+    const target=document.getElementById(tab.dataset.target);
+    if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
   });
+});
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      tabs.forEach(t=>t.classList.remove('active'));
+      const match=document.querySelector(`.tab[data-target="${entry.target.id}"]`);
+      if(match)match.classList.add('active');
+    }
+  });
+},{rootMargin:'-40% 0px -55% 0px'});
+sections.forEach(s=>s&&observer.observe(s));
+
+const hamBtn=document.getElementById('hamBtn');
+const mobileDropdown=document.getElementById('mobileDropdown');
+const mobileSearchBtn=document.getElementById('mobileSearchBtn');
+
+function toggleMobileMenu(){
+  const isOpen=mobileDropdown.classList.toggle('open');
+  hamBtn.setAttribute('aria-expanded',String(isOpen));
+  hamBtn.textContent=isOpen?'✕':'☰';
+}
+function closeMobileMenu(){
+  mobileDropdown.classList.remove('open');
+  hamBtn.setAttribute('aria-expanded','false');
+  hamBtn.textContent='☰';
+}
+hamBtn.addEventListener('click',toggleMobileMenu);
+document.addEventListener('click',e=>{
+  if(mobileDropdown.classList.contains('open') &&
+     !mobileDropdown.contains(e.target) &&
+     !hamBtn.contains(e.target)){
+    closeMobileMenu();
+  }
+});
+window.addEventListener('resize',()=>{
+  if(window.innerWidth>768)closeMobileMenu();
+});
+mobileDropdown.querySelectorAll('.m-link').forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    closeMobileMenu();
+    const target=document.getElementById(link.dataset.target);
+    if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+mobileSearchBtn.addEventListener('click',()=>{
+  closeMobileMenu();
+  openCmdk();
+});
+
+/* ══ COMMAND PALETTE ══ */
+const cmdkOverlay=document.getElementById('cmdkOverlay');
+const cmdkInput=document.getElementById('cmdkInput');
+const cmdkList=document.getElementById('cmdkList');
+const cmdkOpenBtn=document.getElementById('cmdkOpenBtn');
+
+const commands=[
+  {icon:'→',label:'Open Experience',hint:'experience.log',action:()=>scrollToId('experience')},
+  {icon:'→',label:'Open Projects',hint:'projects/',action:()=>scrollToId('projects')},
+  {icon:'→',label:'Open Skills',hint:'skills.yaml',action:()=>scrollToId('skills')},
+  {icon:'→',label:'Open Education',hint:'education.md',action:()=>scrollToId('education')},
+  {icon:'→',label:'Open Contact',hint:'contact.sh',action:()=>scrollToId('contact')},
+  {icon:'📄',label:'View résumé',hint:'opens PDF viewer',action:()=>openViewer()},
+  {icon:'✉',label:'Email Meet',hint:'meetdodiya711879@gmail.com',action:()=>window.location.href='mailto:meetdodiya711879@gmail.com'},
+  {icon:'🐙',label:'Open GitHub',hint:'github.com/meet-dodiya1710',action:()=>window.open('https://github.com/meet-dodiya1710','_blank')},
+  {icon:'in',label:'Open LinkedIn',hint:'linkedin.com/in/meet-dodiya',action:()=>window.open('https://www.linkedin.com/in/meet-dodiya-7b30812ba/','_blank')},
+  {icon:'↑',label:'Back to top',hint:'profile.sh',action:()=>scrollToId('hero')},
+];
+
+function scrollToId(id){
+  const el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+let filtered=commands;
+let selIdx=0;
+
+function renderCmdkList(){
+  cmdkList.innerHTML='';
+  if(filtered.length===0){
+    cmdkList.innerHTML='<div class="cmdk-empty">No matching commands</div>';
+    return;
+  }
+  filtered.forEach((c,i)=>{
+    const item=document.createElement('div');
+    item.className='cmdk-item'+(i===selIdx?' sel':'');
+    item.dataset.idx=i;
+    item.innerHTML=`<span class="ico">${c.icon}</span><span class="lbl">${c.label}</span><span class="hint">${c.hint}</span>`;
+    cmdkList.appendChild(item);
+  });
+}
+/* Event delegation: one listener on the list container instead of per-item
+   listeners that get wiped out by re-rendering. Works reliably for both
+   mouse clicks and touch taps. */
+function highlightItem(idx){
+  cmdkList.querySelectorAll('.cmdk-item').forEach(el=>{
+    el.classList.toggle('sel',Number(el.dataset.idx)===idx);
+  });
+  selIdx=idx;
+}
+cmdkList.addEventListener('mouseover',e=>{
+  const item=e.target.closest('.cmdk-item');
+  if(item)highlightItem(Number(item.dataset.idx));
+});
+cmdkList.addEventListener('click',e=>{
+  const item=e.target.closest('.cmdk-item');
+  if(item)runCommand(Number(item.dataset.idx));
+});
+cmdkList.addEventListener('touchend',e=>{
+  const item=e.target.closest('.cmdk-item');
+  if(item){
+    e.preventDefault();
+    runCommand(Number(item.dataset.idx));
+  }
+},{passive:false});
+function runCommand(i){
+  const c=filtered[i];
+  if(!c)return;
+  closeCmdk();
+  c.action();
+}
+function openCmdk(){
+  cmdkOverlay.classList.add('open');
+  cmdkInput.value='';
+  filtered=commands;selIdx=0;
+  renderCmdkList();
+  /* On touch devices, auto-focusing the input pops the keyboard and covers
+     the list, so only force focus on devices with a real keyboard/pointer. */
+  if(window.matchMedia('(hover: hover) and (pointer: fine)').matches){
+    setTimeout(()=>cmdkInput.focus(),10);
+  }
+}
+function closeCmdk(){
+  cmdkOverlay.classList.remove('open');
+  cmdkInput.blur();
+}
+cmdkOpenBtn.addEventListener('click',openCmdk);
+cmdkOverlay.addEventListener('click',e=>{if(e.target===cmdkOverlay)closeCmdk();});
+cmdkInput.addEventListener('input',()=>{
+  const q=cmdkInput.value.toLowerCase();
+  filtered=commands.filter(c=>c.label.toLowerCase().includes(q)||c.hint.toLowerCase().includes(q));
+  selIdx=0;renderCmdkList();
+});
+cmdkInput.addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'){e.preventDefault();selIdx=Math.min(selIdx+1,filtered.length-1);renderCmdkList();}
+  else if(e.key==='ArrowUp'){e.preventDefault();selIdx=Math.max(selIdx-1,0);renderCmdkList();}
+  else if(e.key==='Enter'){e.preventDefault();runCommand(selIdx);}
+});
+
+document.addEventListener('keydown',e=>{
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){
+    e.preventDefault();
+    cmdkOverlay.classList.contains('open')?closeCmdk():openCmdk();
+  }else if(e.key==='Escape'){
+    if(cmdkOverlay.classList.contains('open'))closeCmdk();
+    else if(mobileDropdown.classList.contains('open'))closeMobileMenu();
+    else closeViewer();
+  }
+});
 </script>
 </body>
 </html>
